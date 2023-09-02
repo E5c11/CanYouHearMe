@@ -2,4 +2,8 @@
 <resources>
     <string name="test">Test</string>
     <string name="results">Results</string>
+    <string name="exit_test">Exit Test</string>
+    <string name="submit">Submit</string>
+    <string name="test_instructions">Your test will start shortly, please listen carefully</string>
+    <string name="round_one">Round One</string>
 </resources>

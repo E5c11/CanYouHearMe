@@ -4,6 +4,113 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".test.ui.TestFragment">
+    
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/default_spacing"
+        android:textSize="@dimen/large_text"
+        android:text="@string/round_one"
+        android:textStyle="bold"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <Button
+        android:id="@+id/exit_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/default_spacing"
+        android:text="@string/exit_test"
+        app:layout_constraintTop_toBottomOf="@id/title"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/test_instructions"
+        android:layout_margin="@dimen/default_spacing"
+        app:layout_constraintTop_toBottomOf="@id/exit_btn"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/digit_one"
+        app:layout_constraintBottom_toTopOf="@id/digit_one"
+        app:layout_constraintStart_toStartOf="@id/digit_one"
+        app:layout_constraintEnd_toEndOf="@id/digit_one"/>
+
+    <EditText
+        android:id="@+id/digit_one"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/default_spacing"
+        android:hint="@string/digit_one"
+        android:inputType="number"
+        android:maxLength="1"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/digit_two"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/digit_two"
+        app:layout_constraintBottom_toTopOf="@id/digit_two"
+        app:layout_constraintStart_toStartOf="@id/digit_two"
+        app:layout_constraintEnd_toEndOf="@id/digit_two"/>
+
+    <EditText
+        android:id="@+id/digit_two"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/default_spacing"
+        android:hint="@string/digit_two"
+        android:inputType="number"
+        android:maxLength="1"
+        app:layout_constraintStart_toEndOf="@id/digit_one"
+        app:layout_constraintEnd_toStartOf="@id/digit_three"
+        app:layout_constraintTop_toTopOf="@id/digit_one"
+        app:layout_constraintBottom_toBottomOf="@id/digit_one"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/digit_three"
+        app:layout_constraintBottom_toTopOf="@id/digit_three"
+        app:layout_constraintStart_toStartOf="@id/digit_three"
+        app:layout_constraintEnd_toEndOf="@id/digit_three"/>
+
+    <EditText
+        android:id="@+id/digit_three"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/default_spacing"
+        android:hint="@string/digit_three"
+        android:inputType="number"
+        android:maxLength="1"
+        app:layout_constraintStart_toEndOf="@id/digit_two"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/digit_one"
+        app:layout_constraintBottom_toBottomOf="@id/digit_one"/>
+
+    <Button
+        android:id="@+id/submit_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/default_spacing"
+        android:text="@string/submit"
+        android:visibility="gone"
+        app:layout_constraintTop_toBottomOf="@id/digit_one"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        tools:visibility="visible"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

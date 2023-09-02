@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">Can you hear me</string>
+
+    <string name="digit_one">Digit 1</string>
+    <string name="digit_two">Digit 2</string>
+    <string name="digit_three">Digit 3</string>
 </resources>
