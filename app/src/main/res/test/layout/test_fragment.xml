@@ -30,6 +30,7 @@
         app:layout_constraintEnd_toEndOf="parent"/>
 
     <TextView
+        android:id="@+id/instructions"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/test_instructions"
@@ -37,6 +38,19 @@
         app:layout_constraintTop_toBottomOf="@id/exit_btn"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"/>
+
+    <TextView
+        android:id="@+id/timer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/default_spacing"
+        android:textSize="@dimen/large_text"
+        android:textStyle="bold"
+        app:layout_constraintTop_toBottomOf="@id/instructions"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/digit_one"
+        tools:text="3"/>
 
     <TextView
         android:layout_width="wrap_content"
