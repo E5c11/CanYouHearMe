@@ -4,4 +4,17 @@
     <string name="digit_one">Digit 1</string>
     <string name="digit_two">Digit 2</string>
     <string name="digit_three">Digit 3</string>
+
+    <string name="one">One</string>
+    <string name="two">Two</string>
+    <string name="three">Three</string>
+    <string name="four">Four</string>
+    <string name="five">Five</string>
+    <string name="six">Six</string>
+    <string name="seven">Seven</string>
+    <string name="eight">Eight</string>
+    <string name="nine">Nine</string>
+    <string name="ten">Ten</string>
+
+    <string name="round">Round %s</string>
 </resources>
