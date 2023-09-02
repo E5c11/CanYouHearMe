@@ -8,12 +8,24 @@
     tools:context=".common.ui.fragment.HomeFragment">
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/test_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/test"
+        android:layout_margin="@dimen/default_spacing"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <TextView
+        android:id="@+id/results"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/results"
+        android:textColor="@color/blue"
+        android:layout_margin="@dimen/default_spacing"
+        app:layout_constraintTop_toBottomOf="@id/test_button"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"/>
 </androidx.constraintlayout.widget.ConstraintLayout>
