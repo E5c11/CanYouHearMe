@@ -36,53 +36,58 @@ class TestFragment: Fragment(R.layout.test_fragment) {
 
         binding = TestFragmentBinding.bind(view)
 
+        viewListeners()
+        observers()
+    }
+
+    private fun viewListeners() = binding.apply {
+        exitBtn.setOnClickListener {
+            findNavController().popBackStack()
+        }
+        digitOne.doOnTextChanged { text, start, before, count ->
+            digitTwo.requestFocus()
+        }
+        digitTwo.doOnTextChanged { text, start, before, count ->
+            digitThree.requestFocus()
+        }
+        digitThree.doOnTextChanged { text, start, before, count ->
+            submitBtn.visibility = View.VISIBLE
+        }
+        submitBtn.setOnClickListener {
+            viewModel.submitRound(digitOne.text.toString(), digitTwo.text.toString(), digitThree.text.toString())
+            submitBtn.visibility = View.INVISIBLE
+            hideSoftInput()
+            stopMedia()
+        }
+    }
+
+    private fun observers() = viewModel.apply {
         binding.apply {
-            exitBtn.setOnClickListener {
-                findNavController().popBackStack()
+            round.collectIn(viewLifecycleOwner) {
+                title.text = resources.getString(R.string.round, it.word(requireContext()))
+                clear()
             }
-
-            digitOne.doOnTextChanged { text, start, before, count ->
-                digitTwo.requestFocus()
+            startTest.collectIn(viewLifecycleOwner) {
+                timer.text = it.toString()
+                if (0 == it) requestSoftInput()
             }
-            digitTwo.doOnTextChanged { text, start, before, count ->
-                digitThree.requestFocus()
-            }
-            digitThree.doOnTextChanged { text, start, before, count ->
-                submitBtn.visibility = View.VISIBLE
-            }
-            submitBtn.setOnClickListener {
-                viewModel.submitRound(digitOne.text.toString(), digitTwo.text.toString(), digitThree.text.toString())
-                submitBtn.visibility = View.INVISIBLE
-                hideSoftInput()
-            }
-            viewModel.apply {
-                round.collectIn(viewLifecycleOwner) {
-                    title.text = resources.getString(R.string.round, it.word(requireContext()))
-                    clear()
-                }
-                startTest.collectIn(viewLifecycleOwner) {
-                    timer.text = it.toString()
-                    if (0 == it) requestSoftInput()
-                }
-                playDigit.collectIn(viewLifecycleOwner) {
-                    digitMp.addSource(requireContext().assets.openFd(it))
-                    digitMp.start {
-                        viewModel.nextDigit()
-                    }
-                }
-                playNoise.collectIn(viewLifecycleOwner) {
-                    requestSoftInput()
-                    noiseMp.addSource(requireContext().assets.openFd(it))
-                    noiseMp.start {  }
-                }
-                stopNoise.collectIn(viewLifecycleOwner) {
-                    noiseMp.stop()
-                }
-                result.collectIn(viewLifecycleOwner) {
-                    Snackbar.make(binding.root, getString(R.string.test_complete, it.toString()), Snackbar.LENGTH_LONG).show()
+            playDigit.collectIn(viewLifecycleOwner) {
+                digitMp.addSource(requireContext().assets.openFd(it))
+                digitMp.start {
+                    viewModel.nextDigit()
                 }
             }
-
+            playNoise.collectIn(viewLifecycleOwner) {
+                requestSoftInput()
+                noiseMp.addSource(requireContext().assets.openFd(it))
+                noiseMp.start {  }
+            }
+            stopNoise.collectIn(viewLifecycleOwner) {
+                noiseMp.stop()
+            }
+            result.collectIn(viewLifecycleOwner) {
+                Snackbar.make(binding.root, getString(R.string.test_complete, it.toString()), Snackbar.LENGTH_LONG).show()
+            }
         }
     }
 
@@ -100,15 +105,19 @@ class TestFragment: Fragment(R.layout.test_fragment) {
 
     private fun hideSoftInput() {
         requireActivity().currentFocus?.let { view ->
-            val imm = requireContext().getSystemService(INPUT_METHOD_SERVICE) as? InputMethodManager
-            imm?.hideSoftInputFromWindow(view.windowToken, 0)
+            val imm = requireContext().getSystemService(INPUT_METHOD_SERVICE) as InputMethodManager
+            imm.hideSoftInputFromWindow(view.windowToken, 0)
         }
+    }
+
+    private fun stopMedia() {
+        noiseMp.stop()
+        digitMp.stop()
     }
 
     override fun onPause() {
         super.onPause()
-        noiseMp.stop()
-        digitMp.stop()
+        stopMedia()
     }
 
 }
