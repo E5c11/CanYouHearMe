@@ -2,6 +2,7 @@ package com.demo.canyouhearme.test.ui
 
 import android.content.Context.INPUT_METHOD_SERVICE
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import androidx.core.widget.doOnTextChanged
@@ -14,6 +15,7 @@ import com.demo.canyouhearme.common.helper.media.MediaPlayer
 import com.demo.canyouhearme.common.helper.word
 import com.demo.canyouhearme.databinding.TestFragmentBinding
 import com.demo.canyouhearme.test.TestViewModel
+import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
@@ -49,12 +51,13 @@ class TestFragment: Fragment(R.layout.test_fragment) {
                 submitBtn.visibility = View.VISIBLE
             }
             submitBtn.setOnClickListener {
-                viewModel.nextTest()
+                viewModel.submitRound(digitOne.text.toString(), digitTwo.text.toString(), digitThree.text.toString())
+                submitBtn.visibility = View.INVISIBLE
+                hideSoftInput()
             }
             viewModel.apply {
                 round.collectIn(viewLifecycleOwner) {
                     title.text = resources.getString(R.string.round, it.word(requireContext()))
-                    submitRound(digitOne.text.toString(), digitTwo.text.toString(), digitThree.text.toString())
                     clear()
                 }
                 startTest.collectIn(viewLifecycleOwner) {
@@ -68,11 +71,15 @@ class TestFragment: Fragment(R.layout.test_fragment) {
                     }
                 }
                 playNoise.collectIn(viewLifecycleOwner) {
+                    requestSoftInput()
                     noiseMp.addSource(requireContext().assets.openFd(it))
                     noiseMp.start {  }
                 }
                 stopNoise.collectIn(viewLifecycleOwner) {
                     noiseMp.stop()
+                }
+                result.collectIn(viewLifecycleOwner) {
+                    Snackbar.make(binding.root, getString(R.string.test_complete, it.toString()), Snackbar.LENGTH_LONG).show()
                 }
             }
 
@@ -83,13 +90,19 @@ class TestFragment: Fragment(R.layout.test_fragment) {
         digitOne.text.clear()
         digitTwo.text.clear()
         digitThree.text.clear()
-        requestSoftInput()
     }
 
     private fun requestSoftInput() {
         binding.digitOne.requestFocus()
         val imm = requireContext().getSystemService(INPUT_METHOD_SERVICE) as InputMethodManager
         imm.showSoftInput(binding.digitOne, InputMethodManager.SHOW_IMPLICIT)
+    }
+
+    private fun hideSoftInput() {
+        requireActivity().currentFocus?.let { view ->
+            val imm = requireContext().getSystemService(INPUT_METHOD_SERVICE) as? InputMethodManager
+            imm?.hideSoftInputFromWindow(view.windowToken, 0)
+        }
     }
 
     override fun onPause() {

@@ -6,10 +6,9 @@ import com.demo.canyouhearme.common.helper.Constant.DIGIT_TIMER_DURATION
 import com.demo.canyouhearme.common.helper.Constant.STOP_NOISE_TIMER_DURATION
 import com.demo.canyouhearme.common.helper.getDigitFile
 import com.demo.canyouhearme.common.helper.getNoiseFile
-import com.demo.canyouhearme.common.helper.random
 import com.demo.canyouhearme.common.helper.timer.Timer
 import com.demo.canyouhearme.common.helper.toSeconds
-import com.demo.canyouhearme.common.helper.word
+import com.demo.canyouhearme.test.helper.TestRenderer
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -17,11 +16,11 @@ import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
-import kotlin.random.Random
 
 @HiltViewModel
 class TestViewModel @Inject constructor(
-    private val timer: Timer
+    private val timer: Timer,
+    private val testRenderer: TestRenderer
 ): ViewModel() {
 
     private var _startTest = MutableSharedFlow<Int>()
@@ -39,6 +38,9 @@ class TestViewModel @Inject constructor(
     private var _round = MutableStateFlow(1)
     val round: StateFlow<Int> = _round
 
+    private var _result = MutableSharedFlow<Int>()
+    val result: SharedFlow<Int> = _result
+
     private var roundCount = 0
     private var digitCount = 0
 
@@ -46,7 +48,7 @@ class TestViewModel @Inject constructor(
         nextTest()
     }
 
-    fun nextTest() {
+    private fun nextTest() {
         if (roundCount != 10) {
             viewModelScope.launch {
                 _round.emit(++roundCount)
@@ -55,7 +57,7 @@ class TestViewModel @Inject constructor(
                 onFinish = {
                     viewModelScope.launch {
                         _startTest.emit(0)
-                        _playNoise.emit(10.random().getNoiseFile())
+                        _playNoise.emit(testRenderer.getLevel().getNoiseFile())
                         updateDigit()
                     }
                 },
@@ -65,10 +67,11 @@ class TestViewModel @Inject constructor(
                     }
                 }
             )
-        } else {
-            //TODO launch score dialog
+        } else viewModelScope.launch {
+            val result = testRenderer.getResult()
+            _result.emit(result.total)
+            //TODO upload result to db
         }
-
     }
 
     fun nextDigit() {
@@ -95,11 +98,12 @@ class TestViewModel @Inject constructor(
     )
 
     private fun updateDigit() = viewModelScope.launch {
-        _playDigit.emit(9.random().getDigitFile())
+        _playDigit.emit(testRenderer.getTriplet()[digitCount].getDigitFile())
         digitCount++
     }
 
     fun submitRound(one: String, two: String, three: String) {
-
+        testRenderer.checkRound(one.toInt(), two.toInt(), three.toInt())
+        nextTest()
     }
 }
