@@ -1,11 +1,10 @@
 # CanYouHearMe
 App consists of three screens:
-Home
-![image](https://github.com/E5c11/CanYouHearMe/assets/38525610/d2ba7b60-6df4-4dec-89a6-808e04c71063)
-Results
-![image](https://github.com/E5c11/CanYouHearMe/assets/38525610/95221bee-ac87-4ba4-9573-36fc98afb6e1)
-Test
-![image](https://github.com/E5c11/CanYouHearMe/assets/38525610/6b7f04e5-d034-4850-8556-8e332d75f647)
+
+| **Home** | **Results** | **TEST** |
+|---|---|---|
+|<img src="https://github.com/E5c11/CanYouHearMe/assets/38525610/d2ba7b60-6df4-4dec-89a6-808e04c71063" width="300"/>|<img src="https://github.com/E5c11/CanYouHearMe/assets/38525610/95221bee-ac87-4ba4-9573-36fc98afb6e1" width="300"/>|<img src="https://github.com/E5c11/CanYouHearMe/assets/38525610/6b7f04e5-d034-4850-8556-8e332d75f647" width="300"/>|
+|  |  |  |
 
 The test screen utilises a countDownTimer to maintain breaks between digits and triplets. The softInput shows and hides according to state of the round. Users are limited to one entry per Digit and moves to the next upon entry.
 Once the test is complete the user is navigated to the results screen.
