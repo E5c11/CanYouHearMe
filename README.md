@@ -19,4 +19,4 @@ This allows a clean model for separation of concerns.
 I am using Kotlin flow to keep state and communicate between the layers.
 Dependency Injection is used throughout, keeping to viewmodel scoping thereby conserving memory.
 
-|<img src="https://github.com/E5c11/CanYouHearMe/assets/38525610/a67020f3-8449-4274-b5e8-4abc9faa0758" width="1200"/>|
+|<img src="https://github.com/E5c11/CanYouHearMe/assets/38525610/1f45c872-e541-4c0c-8454-7238c1afcfc1" width="1200"/>|
