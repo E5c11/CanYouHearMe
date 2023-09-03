@@ -21,4 +21,6 @@
 
     <string name="date_title">Date</string>
     <string name="score_title">Score</string>
+
+    <string name="ok">Okay</string>
 </resources>

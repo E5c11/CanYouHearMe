@@ -2,6 +2,7 @@ package com.demo.canyouhearme.results.ui
 
 import android.os.Bundle
 import android.view.View
+import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -35,7 +36,14 @@ class ResultsFragment: Fragment(R.layout.results_fragment) {
             viewModel.result.collectIn(viewLifecycleOwner) {
                 resultsAdapter.submitList(it.data)
                 progressBar.visibility = View.GONE
+                launchDialog(args.result?.score.toString())
             }
         }
     }
+
+    private fun launchDialog(score: String) = AlertDialog.Builder(requireContext())
+        .setMessage(getString(R.string.test_complete, score))
+        .setPositiveButton(getString(R.string.ok)) { _, _ -> }
+        .create()
+        .show()
 }
