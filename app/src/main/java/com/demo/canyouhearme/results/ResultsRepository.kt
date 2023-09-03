@@ -21,18 +21,10 @@ class ResultsRepository(
             local.fetchAll().collect {
                 emit(it)
             }
+        } catch (e: InsertResultException) {
+            emit(Resource.error(e))
         } catch (e: Exception) {
             emit(Resource.error(InsertResultException(error = e)))
-        }
-    }
-
-    fun delete(result: Result): Flow<Resource<String>> = flow {
-        emit(Resource.loading())
-        try {
-            local.delete(result)
-            emit(Resource.success(""))
-        } catch (e: Exception) {
-            emit(Resource.error(error = DeleteResultException()))
         }
     }
 
