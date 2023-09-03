@@ -1,6 +1,5 @@
 package com.demo.canyouhearme.results.io.remote
 
-import android.util.Log
 import com.demo.canyouhearme.common.helper.Resource
 import com.demo.canyouhearme.results.data.Result
 import com.demo.canyouhearme.results.data.exception.CannotDeleteRemoteException
@@ -17,7 +16,6 @@ class RemoteResultDataSource(
         try {
             val response = api.postResults(result.toUpload())
             val body = response.body()
-            Log.d("myT", "insert: ${response.code()}")
             if (!response.isSuccessful) throw ResultUploadException()
         } catch (e: Exception) {
             throw ResultUploadException(error = e)

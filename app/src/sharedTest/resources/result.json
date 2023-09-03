@@ -1,0 +1,55 @@
+{
+  "score": 21,
+  "rounds":[
+    {
+      "difficulty" : 1,
+      "triplet_played" : "123",
+      "triplet_answered" : "123"
+    },
+    {
+      "difficulty" : 2,
+      "triplet_played" : "563",
+      "triplet_answered" : "563"
+    },
+    {
+      "difficulty" : 1,
+      "triplet_played" : "123",
+      "triplet_answered" : "123"
+    },
+    {
+      "difficulty" : 1,
+      "triplet_played" : "123",
+      "triplet_answered" : "123"
+    },
+    {
+      "difficulty" : 1,
+      "triplet_played" : "123",
+      "triplet_answered" : "123"
+    },
+    {
+      "difficulty" : 1,
+      "triplet_played" : "123",
+      "triplet_answered" : "123"
+    },
+    {
+      "difficulty" : 1,
+      "triplet_played" : "123",
+      "triplet_answered" : "123"
+    },
+    {
+      "difficulty" : 1,
+      "triplet_played" : "123",
+      "triplet_answered" : "123"
+    },
+    {
+      "difficulty" : 1,
+      "triplet_played" : "123",
+      "triplet_answered" : "123"
+    },
+    {
+      "difficulty" : 1,
+      "triplet_played" : "123",
+      "triplet_answered" : "123"
+    }
+  ]
+}

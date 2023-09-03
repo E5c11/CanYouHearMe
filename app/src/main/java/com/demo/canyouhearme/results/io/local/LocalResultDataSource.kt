@@ -13,6 +13,7 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.flow.map
+import java.io.IOException
 
 class LocalResultDataSource(
     private val dao: ResultDao,
@@ -20,7 +21,8 @@ class LocalResultDataSource(
 ): ResultDataSource {
     override suspend fun insert(result: Result) {
         try {
-            dao.insert(result.toEntity())
+            val row = dao.insert(result.toEntity())
+            if (row == 0L) throw IOException()
         } catch (e: Exception) {
             throw InsertResultException(error = e)
         }
@@ -29,10 +31,9 @@ class LocalResultDataSource(
     override suspend fun delete(result: Result) {
         try {
             val response = dao.delete(result.toEntity())
-            if (response == 0) Resource.error(DeleteResultException())
-            else Resource.success("")
+            if (response == 0) throw IOException()
         } catch (e: Exception) {
-            Resource.error(DeleteResultException(error = e))
+            throw DeleteResultException(error = e)
         }
     }
 

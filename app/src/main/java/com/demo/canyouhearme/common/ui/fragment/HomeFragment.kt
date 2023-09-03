@@ -22,10 +22,8 @@ class HomeFragment: Fragment(R.layout.home_fragment) {
 
         binding.apply {
             testButton.setOnClickListener {
-                val json = requireContext().readJsonFromAssets("result.json")
-                val result = Gson().fromJson(json, Result::class.java)
-                findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToResultsFragment(result))
-//                findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToTestFragment())
+//                skipTest()
+                findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToTestFragment())
             }
             results.setOnClickListener {
                 findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToResultsFragment())
@@ -33,4 +31,9 @@ class HomeFragment: Fragment(R.layout.home_fragment) {
         }
     }
 
+    private fun skipTest() {
+        val json = requireContext().readJsonFromAssets("result.json")
+        val result = Gson().fromJson(json, Result::class.java)
+        findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToResultsFragment(result))
+    }
 }
