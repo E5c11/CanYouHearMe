@@ -85,7 +85,7 @@ class TestFragment: Fragment(R.layout.test_fragment) {
                 noiseMp.stop()
             }
             result.collectIn(viewLifecycleOwner) {
-                Snackbar.make(binding.root, getString(R.string.test_complete, it.toString()), Snackbar.LENGTH_LONG).show()
+                findNavController().navigate(TestFragmentDirections.actionTestFragmentToResultsFragment(it))
             }
         }
     }

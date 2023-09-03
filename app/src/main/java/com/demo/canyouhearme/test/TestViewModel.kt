@@ -8,6 +8,7 @@ import com.demo.canyouhearme.common.helper.getDigitFile
 import com.demo.canyouhearme.common.helper.getNoiseFile
 import com.demo.canyouhearme.common.helper.timer.Timer
 import com.demo.canyouhearme.common.helper.toSeconds
+import com.demo.canyouhearme.results.data.Result
 import com.demo.canyouhearme.test.helper.TestRenderer
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableSharedFlow
@@ -38,8 +39,8 @@ class TestViewModel @Inject constructor(
     private var _round = MutableStateFlow(1)
     val round: StateFlow<Int> = _round
 
-    private var _result = MutableSharedFlow<Int>()
-    val result: SharedFlow<Int> = _result
+    private var _result = MutableSharedFlow<Result>()
+    val result: SharedFlow<Result> = _result
 
     private var roundCount = 0
     private var digitCount = 0
@@ -68,9 +69,7 @@ class TestViewModel @Inject constructor(
                 }
             )
         } else viewModelScope.launch {
-            val result = testRenderer.getResult()
-            _result.emit(result.total)
-            //TODO upload result to db
+            _result.emit(testRenderer.getResult())
         }
     }
 
