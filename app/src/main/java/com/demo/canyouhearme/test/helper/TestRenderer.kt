@@ -1,7 +1,10 @@
 package com.demo.canyouhearme.test.helper
 
 import com.demo.canyouhearme.results.data.Result
+import java.text.SimpleDateFormat
 import java.util.Arrays
+import java.util.Calendar
+import java.util.Locale
 import java.util.Random
 import java.util.stream.Collectors
 import java.util.stream.IntStream
@@ -30,27 +33,26 @@ class TestRenderer(
     }
 
     fun checkRound(one: Int, two: Int, three: Int) {
-        _roundTriplets[_round - 1].matches(one, two, three).calculateScore()
+        _roundTriplets[_round - 1].matches(one, two, three).calculateScore(one, two, three)
     }
 
-    private fun Boolean.calculateScore() {
-        when (_round) {
-            1 -> _result.one = this.score()
-            2 -> _result.two = this.score()
-            3 -> _result.three = this.score()
-            4 -> _result.four = this.score()
-            5 -> _result.five = this.score()
-            6 -> _result.six = this.score()
-            7 -> _result.seven = this.score()
-            8 -> _result.eight = this.score()
-            9 -> _result.nine = this.score()
-            else -> _result.ten = this.score()
-        }
+    private fun Boolean.calculateScore(one: Int, two: Int, three: Int) {
+        insertRound(one, two, three)
         _round++
         if (this) {
             _score += _level
-            if (_level <= 9) _level++
+            if (_level != 10) _level++
+            else {
+                _result.score = _score
+                _result.date = getDate()
+            }
         }
+    }
+
+    private fun insertRound(one: Int, two: Int, three: Int) = _result.rounds[_round - 1].apply {
+        difficulty = _level
+        tripletPlayed = _roundTriplets[_round - 1].joinToString("")
+        tripletPlayed = "$one$two$three"
     }
 
     private fun generateTriplets() {
@@ -82,12 +84,12 @@ class TestRenderer(
         return rangeExcluding[newRandomInt]
     }
 
-    private fun Boolean.score(): Int {
-        val roundScore = if (this) 0 else _level
-        _result.total += roundScore
-        return roundScore
-    }
-
     private fun List<Int>.matches(one: Int, two: Int, three: Int): Boolean =
         this[0] == one && this[1] == two && this[2] == three
+
+    private fun getDate(): String {
+        val calendar = Calendar.getInstance()
+        val dateFormat = SimpleDateFormat("dd-MM-yyyy", Locale.getDefault())
+        return dateFormat.format(calendar.time)
+    }
 }

@@ -27,7 +27,6 @@ class TestFragment: Fragment(R.layout.test_fragment) {
 
     @Inject
     lateinit var digitMp: MediaPlayer
-
     @Inject
     lateinit var noiseMp: MediaPlayer
 

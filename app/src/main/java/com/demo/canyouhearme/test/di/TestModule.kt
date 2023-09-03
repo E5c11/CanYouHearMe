@@ -1,7 +1,5 @@
 package com.demo.canyouhearme.test.di
 
-import com.demo.canyouhearme.common.helper.media.DefaultMediaPlayer
-import com.demo.canyouhearme.common.helper.media.MediaPlayer
 import com.demo.canyouhearme.common.helper.timer.DefaultTimer
 import com.demo.canyouhearme.common.helper.timer.Timer
 import com.demo.canyouhearme.test.helper.TestRenderer
@@ -17,9 +15,6 @@ object TestModule {
 
     @Provides
     fun providesTimer(): Timer = DefaultTimer()
-
-    @Provides
-    fun providesMediaPlayer(): MediaPlayer = DefaultMediaPlayer()
 
     @Provides
     fun providesTestRenderer(random: Random): TestRenderer = TestRenderer(random)
