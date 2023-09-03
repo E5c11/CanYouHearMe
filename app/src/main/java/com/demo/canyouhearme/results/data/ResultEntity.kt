@@ -7,7 +7,7 @@ import com.google.gson.annotations.SerializedName
 @Entity(tableName = "result_table")
 data class ResultEntity(
     @PrimaryKey(autoGenerate = true)
-    val id: Long,
+    val id: Long = 1,
     val score: Int,
     val rounds: ArrayList<Round>,
     val date: String
