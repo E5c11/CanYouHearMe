@@ -17,5 +17,6 @@ The Home screen has two buttons navigating to the Test screen which immediately 
 I have gone with an MVVM architecture
 This allows a clean model for separation of concerns. 
 I am using Kotlin flow to keep state and communicate between the layers.
+Dependency Injection is used throughout, keeping to viewmodel scoping thereby conserving memory.
 
 |<img src="https://github.com/E5c11/CanYouHearMe/assets/38525610/a67020f3-8449-4274-b5e8-4abc9faa0758" width="1200"/>|
