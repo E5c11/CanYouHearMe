@@ -59,7 +59,7 @@ object ResultsModule {
         LocalResultDataSource(dao, dispatcher)
 
     @Provides
-    fun providesResultsRepository(local: ResultDataSource, remote: ResultDataSource) =
+    fun providesResultsRepository(@LocalSource local: ResultDataSource, @RemoteSource remote: ResultDataSource) =
         ResultsRepository(local, remote)
 
 }

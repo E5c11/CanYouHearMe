@@ -7,6 +7,6 @@ import retrofit2.http.Body
 import retrofit2.http.POST
 
 interface ResultApi {
-    @POST
-    fun postResults(@Body results: ResultUpload): Response<ResponseBody>
+    @POST("./")
+    suspend fun postResults(@Body results: ResultUpload): Response<ResponseBody>
 }

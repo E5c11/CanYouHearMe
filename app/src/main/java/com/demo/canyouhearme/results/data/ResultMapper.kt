@@ -13,7 +13,7 @@ fun Result.toEntity() = ResultEntity(
 
 fun ResultEntity.toResult() = Result(
     score = this.score,
-    rounds = this.rounds,
+    rounds = ArrayList(this.rounds),
     date = this.date
 )
 

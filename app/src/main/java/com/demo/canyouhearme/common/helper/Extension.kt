@@ -8,6 +8,8 @@ import androidx.lifecycle.repeatOnLifecycle
 import com.demo.canyouhearme.R
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.launch
+import java.io.IOException
+import java.io.InputStream
 import kotlin.math.ceil
 import kotlin.random.Random
 
@@ -39,3 +41,17 @@ fun Int.word(ctx: Context) = when (this) {
 }
 
 fun Context.string(id: Int) = this.resources.getString(id)
+
+fun Context.readJsonFromAssets(fileName: String): String? {
+    return try {
+        val inputStream: InputStream = this.assets.open(fileName)
+        val size: Int = inputStream.available()
+        val buffer = ByteArray(size)
+        inputStream.read(buffer)
+        inputStream.close()
+        String(buffer, Charsets.UTF_8)
+    } catch (e: IOException) {
+        e.printStackTrace()
+        null
+    }
+}

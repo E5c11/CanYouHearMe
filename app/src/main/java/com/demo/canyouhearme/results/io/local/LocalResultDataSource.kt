@@ -18,17 +18,16 @@ class LocalResultDataSource(
     private val dao: ResultDao,
     private val dispatcher: DispatcherProvider
 ): ResultDataSource {
-    override suspend fun insert(result: Result): Resource<String> {
-        return try {
+    override suspend fun insert(result: Result) {
+        try {
             dao.insert(result.toEntity())
-            Resource.success("")
         } catch (e: Exception) {
-            Resource.error(InsertResultException(error = e))
+            throw InsertResultException(error = e)
         }
     }
 
-    override suspend fun delete(result: Result): Resource<String> {
-        return try {
+    override suspend fun delete(result: Result) {
+        try {
             val response = dao.delete(result.toEntity())
             if (response == 0) Resource.error(DeleteResultException())
             else Resource.success("")

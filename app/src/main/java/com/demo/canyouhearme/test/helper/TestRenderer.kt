@@ -1,6 +1,7 @@
 package com.demo.canyouhearme.test.helper
 
 import com.demo.canyouhearme.results.data.Result
+import com.demo.canyouhearme.results.data.Round
 import java.text.SimpleDateFormat
 import java.util.Arrays
 import java.util.Calendar
@@ -49,10 +50,13 @@ class TestRenderer(
         }
     }
 
-    private fun insertRound(one: Int, two: Int, three: Int) = _result.rounds[_round - 1].apply {
-        difficulty = _level
-        tripletPlayed = _roundTriplets[_round - 1].joinToString("")
-        tripletPlayed = "$one$two$three"
+    private fun insertRound(one: Int, two: Int, three: Int) {
+        val round = Round(
+            difficulty = _level,
+            tripletPlayed = _roundTriplets[_round - 1].joinToString(""),
+            tripletAnswered = "$one$two$three"
+        )
+        _result.rounds.add(round)
     }
 
     private fun generateTriplets() {

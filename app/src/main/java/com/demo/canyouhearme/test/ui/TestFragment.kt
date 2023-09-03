@@ -2,7 +2,6 @@ package com.demo.canyouhearme.test.ui
 
 import android.content.Context.INPUT_METHOD_SERVICE
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import androidx.core.widget.doOnTextChanged
@@ -15,7 +14,6 @@ import com.demo.canyouhearme.common.helper.media.MediaPlayer
 import com.demo.canyouhearme.common.helper.word
 import com.demo.canyouhearme.databinding.TestFragmentBinding
 import com.demo.canyouhearme.test.TestViewModel
-import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 

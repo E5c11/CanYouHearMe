@@ -49,6 +49,10 @@ android {
                     'src/main/res'
             ]
         }
+        test {
+            resources.srcDirs += ['src/sharedTest/resources']
+            java.srcDirs += ['src/sharedTest/java']
+        }
     }
 
     packagingOptions {

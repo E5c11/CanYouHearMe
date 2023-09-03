@@ -33,7 +33,7 @@ class ResultsFragment: Fragment(R.layout.results_fragment) {
             recyclerView.adapter = resultsAdapter
 
             viewModel.result.collectIn(viewLifecycleOwner) {
-                resultsAdapter.submitList(it)
+                resultsAdapter.submitList(it.data)
                 progressBar.visibility = View.GONE
             }
         }

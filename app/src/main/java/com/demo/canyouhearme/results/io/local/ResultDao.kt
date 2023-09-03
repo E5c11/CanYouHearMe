@@ -17,7 +17,7 @@ interface ResultDao {
     @Delete
     suspend fun delete(result: ResultEntity): Int
 
-    @Query("SELECT * FROM result_table")
+    @Query("SELECT * FROM result_table ORDER BY score DESC")
     fun fetchAll(): Flow<List<ResultEntity>>
 
     @Query("SELECT * FROM result_table WHERE id = :id")
