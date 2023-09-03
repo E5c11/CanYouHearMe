@@ -1,6 +1,7 @@
 package com.demo.canyouhearme.results.di
 
 import com.demo.canyouhearme.common.helper.Constant.BASE_URL
+import com.demo.canyouhearme.common.helper.DispatcherProvider
 import com.demo.canyouhearme.results.ResultsRepository
 import com.demo.canyouhearme.results.io.ResultDataSource
 import com.demo.canyouhearme.results.io.local.LocalResultDataSource
@@ -54,7 +55,8 @@ object ResultsModule {
 
     @Provides
     @LocalSource
-    fun providesLocalDataSource(dao: ResultDao): ResultDataSource = LocalResultDataSource(dao)
+    fun providesLocalDataSource(dao: ResultDao, dispatcher: DispatcherProvider): ResultDataSource =
+        LocalResultDataSource(dao, dispatcher)
 
     @Provides
     fun providesResultsRepository(local: ResultDataSource, remote: ResultDataSource) =

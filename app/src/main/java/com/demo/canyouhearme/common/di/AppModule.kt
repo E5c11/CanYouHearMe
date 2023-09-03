@@ -2,6 +2,7 @@ package com.demo.canyouhearme.common.di
 
 import android.app.Application
 import androidx.room.Room
+import com.demo.canyouhearme.common.helper.DispatcherProvider
 import com.demo.canyouhearme.common.helper.media.DefaultMediaPlayer
 import com.demo.canyouhearme.common.helper.media.MediaPlayer
 import com.demo.canyouhearme.results.io.local.ResultDatabase
@@ -26,4 +27,8 @@ object AppModule {
     @Provides
     @Singleton
     fun providesMediaPlayer(): MediaPlayer = DefaultMediaPlayer()
+
+    @Provides
+    @Singleton
+    fun providesDispatchProvider() = DispatcherProvider()
 }

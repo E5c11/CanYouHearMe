@@ -7,6 +7,5 @@ import kotlinx.coroutines.flow.Flow
 interface ResultDataSource {
     suspend fun insert(result: Result): Resource<String>
     suspend fun delete(result: Result): Resource<String>
-    suspend fun fetchById(id: Int): Resource<Result>
-    fun fetchAll(): Flow<List<Result>>
+    fun fetchAll(): Flow<Resource<List<Result>>>
 }

@@ -16,3 +16,5 @@ fun ResultEntity.toResult() = Result(
     rounds = this.rounds,
     date = this.date
 )
+
+fun List<ResultEntity>.toResultList() = this.mapNotNull { it.toResult() }
