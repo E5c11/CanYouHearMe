@@ -23,4 +23,5 @@
     <string name="score_title">Score</string>
 
     <string name="ok">Okay</string>
+    <string name="tested_digits">0123456789</string>
 </resources>

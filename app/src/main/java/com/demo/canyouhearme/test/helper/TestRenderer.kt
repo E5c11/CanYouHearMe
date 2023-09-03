@@ -39,15 +39,15 @@ class TestRenderer(
 
     private fun Boolean.calculateScore(one: Int, two: Int, three: Int) {
         insertRound(one, two, three)
-        _round++
         if (this) {
             _score += _level
             if (_level != 10) _level++
-            else {
-                _result.score = _score
-                _result.date = getDate()
-            }
         }
+        if (_round == 10)  {
+            _result.score = _score
+            _result.date = getDate()
+        }
+        _round++
     }
 
     private fun insertRound(one: Int, two: Int, three: Int) {

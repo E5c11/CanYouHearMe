@@ -7,9 +7,11 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.demo.canyouhearme.R
+import com.demo.canyouhearme.common.helper.Resource
 import com.demo.canyouhearme.common.helper.collectIn
 import com.demo.canyouhearme.databinding.ResultsFragmentBinding
 import com.demo.canyouhearme.results.ResultsViewModel
+import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -34,9 +36,20 @@ class ResultsFragment: Fragment(R.layout.results_fragment) {
             recyclerView.adapter = resultsAdapter
 
             viewModel.result.collectIn(viewLifecycleOwner) {
-                resultsAdapter.submitList(it.data)
-                progressBar.visibility = View.GONE
-                launchDialog(args.result?.score.toString())
+                when (it.status) {
+                    Resource.Status.LOADING -> progressBar.visibility = View.VISIBLE
+                    Resource.Status.SUCCESS -> {
+                        progressBar.visibility = View.GONE
+                        resultsAdapter.submitList(it.data)
+                        args.result?.score?.let { score ->
+                            launchDialog(score.toString())
+                        }
+                    }
+                    Resource.Status.ERROR -> {
+                        progressBar.visibility = View.GONE
+                        Snackbar.make(binding.root, it.error?.localizedMessage.toString(), Snackbar.LENGTH_SHORT).show()
+                    }
+                }
             }
         }
     }

@@ -47,9 +47,6 @@ class TestFragment: Fragment(R.layout.test_fragment) {
         digitTwo.doOnTextChanged { text, start, before, count ->
             digitThree.requestFocus()
         }
-        digitThree.doOnTextChanged { text, start, before, count ->
-            submitBtn.visibility = View.VISIBLE
-        }
         submitBtn.setOnClickListener {
             viewModel.submitRound(digitOne.text.toString(), digitTwo.text.toString(), digitThree.text.toString())
             submitBtn.visibility = View.INVISIBLE
@@ -80,6 +77,7 @@ class TestFragment: Fragment(R.layout.test_fragment) {
                 noiseMp.start {  }
             }
             stopNoise.collectIn(viewLifecycleOwner) {
+                submitBtn.visibility = View.VISIBLE
                 noiseMp.stop()
             }
             result.collectIn(viewLifecycleOwner) {

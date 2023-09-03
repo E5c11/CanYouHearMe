@@ -97,7 +97,8 @@ class TestViewModel @Inject constructor(
     )
 
     private fun updateDigit() = viewModelScope.launch {
-        _playDigit.emit(testRenderer.getTriplet()[digitCount].getDigitFile())
+        val digit = testRenderer.getTriplet()[digitCount].getDigitFile()
+        _playDigit.emit(digit)
         digitCount++
     }
 
