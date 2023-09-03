@@ -3,7 +3,7 @@ App consists of three screens:
 
 | **Home** | **Results** | **TEST** |
 |---|---|---|
-|<img src="https://github.com/E5c11/CanYouHearMe/assets/38525610/d2ba7b60-6df4-4dec-89a6-808e04c71063" width="300"/>|<img src="https://github.com/E5c11/CanYouHearMe/assets/38525610/95221bee-ac87-4ba4-9573-36fc98afb6e1" width="300"/>|<img src="https://github.com/E5c11/CanYouHearMe/assets/38525610/6b7f04e5-d034-4850-8556-8e332d75f647" width="300"/>|
+|<img src="https://github.com/E5c11/CanYouHearMe/assets/38525610/eb354b82-0db4-49dd-b9a5-59625fb94a2a" width="300"/>|<img src="https://github.com/E5c11/CanYouHearMe/assets/38525610/a72682d3-b954-4afa-8d4c-4c1931709872" width="300"/>|<img src="https://github.com/E5c11/CanYouHearMe/assets/38525610/d894a472-bbe5-4f68-af43-c6b387888da8" width="300"/>|
 |  |  |  |
 
 The test screen utilises a countDownTimer to maintain breaks between digits and triplets. The softInput shows and hides according to state of the round. Users are limited to one entry per Digit and moves to the next upon entry.
